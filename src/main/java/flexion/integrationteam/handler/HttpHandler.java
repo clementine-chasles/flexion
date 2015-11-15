@@ -23,6 +23,8 @@ import flexion.integrationteam.util.Strings;
 @Component
 public class HttpHandler {
 	
+	final static Logger LOGGER = Logger.getLogger(HttpHandler.class);
+	
 	@Value("${url.flexion.api}")
 	private String urlFlexion;
 
@@ -75,8 +77,8 @@ public class HttpHandler {
 		con.setRequestProperty("User-Agent", USER_AGENT);
 
 		int responseCode = con.getResponseCode();
-		System.out.println("Sending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
+		LOGGER.info("Sending 'GET' request to URL : " + url);
+		LOGGER.info("Response Code : " + responseCode);
 
 		if (HTTP_OK != responseCode) {
 			throw new ErrorResponseException(responseCode);
@@ -111,8 +113,8 @@ public class HttpHandler {
 		con.setDoOutput(true);
 
 		int responseCode = con.getResponseCode();
-		System.out.println("Sending 'POST' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
+		LOGGER.info("Sending 'POST' request to URL : " + url);
+		LOGGER.info("Response Code : " + responseCode);
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				con.getInputStream()));
